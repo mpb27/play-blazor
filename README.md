@@ -21,3 +21,11 @@ References:
 https://dev.to/j_sakamoto/the-easier-way-to-publish-your-blazor-webassembly-app-for-github-pages-319l
 https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-5.0
 
+
+### Minimizing Application Size
+
+
+References:
+
+https://www.meziantou.net/optimizing-a-blazor-webassembly-application-size.htm
+
