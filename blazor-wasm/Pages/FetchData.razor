@@ -5,6 +5,8 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
+<button class="btn btn-primary" @onclick="RemoveRow">Click me</button>
+
 @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
@@ -36,10 +38,20 @@ else
 
 @code {
     private WeatherForecast[] forecasts;
+    private System.Timers.Timer m_timer;
+
+    private void TimerTick(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        forecasts[0].TemperatureC = forecasts[0].TemperatureC + 1;
+        InvokeAsync(StateHasChanged);
+    }
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        m_timer = new System.Timers.Timer(1000);
+        m_timer.Elapsed += TimerTick;
+        m_timer.Enabled = true;
     }
 
     public class WeatherForecast
@@ -52,4 +64,9 @@ else
 
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
+
+    private void RemoveRow()
+    {
+        forecasts = forecasts.Take(forecasts.Length -1).ToArray();
+    }    
 }
