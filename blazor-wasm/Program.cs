@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using Serilog;
+using Serilog.Sinks.BrowserConsole;
+
 namespace blazor_wasm
 {
     public class Program
@@ -18,6 +21,12 @@ namespace blazor_wasm
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.BrowserConsole()
+                .CreateLogger();
+
+            Log.Information("Hello, browser!");
 
             await builder.Build().RunAsync();
         }

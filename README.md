@@ -29,3 +29,12 @@ References:
 
 https://www.meziantou.net/optimizing-a-blazor-webassembly-application-size.htm
 
+### Adding Logging
+
+https://github.com/serilog/serilog-sinks-browserconsole
+
+```bash
+dotnet add package Serilog.Sinks.BrowserConsole --prerelease
+```
+
+

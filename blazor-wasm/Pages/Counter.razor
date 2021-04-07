@@ -1,3 +1,4 @@
+@using Serilog;
 @page "/counter"
 
 <h1>Counter</h1>
@@ -12,5 +13,21 @@
     private void IncrementCount()
     {
         currentCount++;
+
+        if (currentCount < 5)
+        {
+            Log.ForContext<Counter>().Information("Incremented count to {CurrentCount}", currentCount);
+        }
+        else
+        {
+            try
+            {
+                throw new NotSupportedException("Too many clicks!");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Failed at {CurrentCount}", currentCount);
+            }
+        }
     }
 }
