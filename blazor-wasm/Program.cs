@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Sinks.BrowserConsole;
 
+using MudBlazor.Services;
+
 namespace blazor_wasm
 {
     public class Program
@@ -21,6 +23,8 @@ namespace blazor_wasm
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddMudServices();
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.BrowserConsole()
